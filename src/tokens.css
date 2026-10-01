@@ -1,0 +1,148 @@
+/* Just ecommerce Design System — tokens.
+ * Fuente: https://claude.ai/artifact/XwKHYX1c6Kf7ADicNssfEf (Claude Design, "Just ecommerce Design System"),
+ * copiados tal cual de project/tokens/*.css (colors, typography, spacing, radius, effects).
+ * Fuentes con licencia provistas en el design system: FreightText Pro Medium Italic y Neue Haas Grotesk Display Pro
+ * (solo los pesos que usa la app: 400, 400 itálica y 500).
+ * Los "+" (hotspots) mantienen sus colores propios, pedidos aparte (no son parte del design system).
+ */
+@font-face{font-family:"FreightTextProMedium-Italic";src:url("/fonts/FreightTextProMedium-Italic.otf") format("opentype");font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:"Just Sans";src:url("/fonts/NHaasGroteskDSPro-55Rg.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Just Sans";src:url("/fonts/NHaasGroteskDSPro-56It.otf") format("opentype");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Just Sans";src:url("/fonts/NHaasGroteskDSPro-65Md.otf") format("opentype");font-weight:500;font-style:normal;font-display:swap}
+
+/* Just ecommerce — color tokens (source: Figma "Just | DS | E-Commerce", via DesignBridge DESIGN.md) */
+:root{
+  /* Primitives */
+  --neutral-white:#ffffff; --neutral-100:#fdfbf5; --neutral-200:#f5f2e9; --neutral-300:#ede9de; --neutral-400:#d5d1c6; --neutral-500:#b6b2a5; --neutral-600:#95938b; --neutral-700:#736f64; --neutral-800:#4c4a42; --neutral-900:#292724; --neutral-black:#000000;
+  --verde-50:#f7faf0; --verde-100:#f0f5e1; --verde-200:#e6edcf; --verde-250:#dde5be; --verde-300:#c8d29b; --verde-400:#9baa6e; --verde-500:#788746; --verde-600:#6b7841; --verde-700:#505a2d; --verde-800:#2a2f18; --verde-900:#171a0d;
+  --caramelo-50:#fffaf0; --caramelo-100:#fef5e1; --caramelo-200:#feebc3; --caramelo-300:#fcd787; --caramelo-400:#fbc34b; --caramelo-500:#faaf0f; --caramelo-600:#db9600; --caramelo-700:#b27a00; --caramelo-800:#996800; --caramelo-900:#7e5705;
+  --prisco-50:#fff8f5; --prisco-100:#fff1ea; --prisco-200:#ffe2d6; --prisco-300:#ffc5ac; --prisco-400:#ffa983; --prisco-500:#ff8c5a; --prisco-600:#e75e23; --prisco-700:#dc5418; --prisco-800:#c14915; --prisco-900:#aa4113; --prisco-950:#81310e;
+  --rubor-50:#fdf4f6; --rubor-100:#fce8ec; --rubor-200:#f9d2d9; --rubor-300:#f2a5b4; --rubor-400:#ec788e; --rubor-500:#e64b69; --rubor-600:#c72343; --rubor-700:#981b33; --rubor-800:#82172c; --rubor-900:#570f1d;
+  --indigo-50:#f7f6fb; --indigo-100:#eeecf7; --indigo-200:#ddd9ef; --indigo-300:#bbb4de; --indigo-400:#9a8ece; --indigo-500:#7869be; --indigo-600:#4c3e8e; --indigo-700:#261f47;
+  --ceruleo-50:#f4f8f9; --ceruleo-100:#e9f1f3; --ceruleo-200:#d3e2e7; --ceruleo-300:#a7c5cf; --ceruleo-400:#7ca9b8; --ceruleo-500:#508ca0; --ceruleo-600:#385e6b; --ceruleo-700:#233b43;
+  /* Component palettes: categorías + combinaciones */
+  --categories-b-dermo:#fef5e1; --categories-b-mental:#e9f1f3; --categories-b-fisico:#f0f5e1; --categories-aromaterapia:#eeecf7; --combinations-alegria:#e8f0fc; --combinations-creatividad:#fbf4da; --combinations-antibacterial:#eaf6cb; --combinations-tranquilidad:#e2f6f6; --combinations-comfort-estomacal:#fcece8; --combinations-reanima:#fdf1e3; --combinations-valentia:#efeffb; --combinations-amor:#feecee; --combinations-pasion:#f3edfd; --combinations-balance-femenino:#fef0fa; --combinations-foco:#e7f3ed;
+  --status-green-50:#edfae5; --status-green-700:#38830c; --status-green-900:#1e4606;
+
+  /* Semantic — background */
+  --bg-crema:var(--neutral-100); --bg-white:var(--neutral-white); --bg-neutral-200:var(--neutral-200); --bg-neutral-300:var(--neutral-300); --bg-neutral-400:var(--neutral-400);
+  --bg-verde-50:var(--verde-50); --bg-verde-100:var(--verde-100); --bg-verde-250:var(--verde-250); --bg-verde-300:var(--verde-300);
+  --bg-inverse:var(--neutral-900); --bg-disabled:var(--neutral-300);
+  /* Semantic — text */
+  --text-primary:var(--neutral-800); --text-secondary:var(--neutral-700); --text-tertiary:var(--neutral-600); --text-inverse:var(--neutral-white);
+  --text-disabled-light:var(--neutral-400); --text-disabled-dark:var(--neutral-500);
+  --text-verde-primary-1:var(--verde-700); --text-verde-secondary-1:var(--verde-600); --text-verde-primary-2:var(--verde-800); --text-verde-secondary-2:var(--verde-700);
+  --text-caramelo-primary-1:var(--caramelo-900); --text-caramelo-secondary-1:var(--caramelo-700);
+  --text-prisco-primary-1:var(--prisco-900); --text-prisco-secondary-1:var(--prisco-700); --text-prisco-primary-2:var(--prisco-950);
+  --text-rubor-primary-1:var(--rubor-800); --text-rubor-secondary-1:var(--rubor-600); --text-rubor-primary-2:var(--rubor-900);
+  --text-indigo-primary-1:var(--indigo-600); --text-indigo-secondary-1:var(--indigo-500); --text-indigo-primary-2:var(--indigo-700);
+  --text-ceruleo-primary-1:var(--ceruleo-600); --text-ceruleo-secondary-1:var(--ceruleo-500); --text-ceruleo-primary-2:var(--ceruleo-700);
+  /* Semantic — icon */
+  --icon-primary:var(--neutral-600); --icon-secondary:var(--neutral-500); --icon-accent:var(--verde-400); --icon-accent-on-green:var(--verde-700); --icon-accent-with-text:var(--verde-600); --icon-inverse:var(--neutral-white); --icon-disabled:var(--neutral-300);
+  /* Semantic — stroke */
+  --stroke-primary:var(--neutral-300); --stroke-light:var(--neutral-200); --stroke-dark:var(--neutral-400); --stroke-dark-2:var(--neutral-600);
+  --stroke-accent:var(--verde-400); --stroke-accent-dark:var(--verde-600); --stroke-accent-dark-2:var(--verde-700); --stroke-inverse:var(--neutral-white); --stroke-disabled:var(--neutral-300);
+  /* Semantic — interactive (default / hover / pressed) */
+  --interactive-verde:var(--verde-400); --interactive-verde-hover:var(--verde-500); --interactive-verde-pressed:var(--verde-600);
+  --interactive-crema:var(--neutral-200); --interactive-crema-hover:var(--neutral-300); --interactive-crema-pressed:var(--neutral-400);
+  --interactive-light:var(--neutral-white); --interactive-light-hover:var(--neutral-100); --interactive-light-pressed:var(--neutral-200);
+  --interactive-dark:var(--neutral-700); --interactive-dark-hover:var(--neutral-800); --interactive-dark-pressed:var(--neutral-900);
+  --interactive-caramelo:var(--caramelo-400); --interactive-caramelo-hover:var(--caramelo-500); --interactive-caramelo-pressed:var(--caramelo-600);
+  --interactive-prisco:var(--prisco-400); --interactive-prisco-hover:var(--prisco-500); --interactive-prisco-pressed:var(--prisco-600);
+  --interactive-rubor:var(--rubor-400); --interactive-rubor-hover:var(--rubor-500); --interactive-rubor-pressed:var(--rubor-600);
+  --interactive-indigo:var(--indigo-400); --interactive-indigo-hover:var(--indigo-500); --interactive-indigo-pressed:var(--indigo-600);
+  --interactive-ceruleo:var(--ceruleo-400); --interactive-ceruleo-hover:var(--ceruleo-500); --interactive-ceruleo-pressed:var(--ceruleo-600);
+  /* Status */
+  --error-text:var(--rubor-600); --error-text-light:var(--rubor-500); --error-icon:var(--rubor-600); --error-icon-light:var(--rubor-500); --error-stroke:var(--rubor-600); --error-surface:var(--rubor-500); --error-surface-light:var(--rubor-100);
+  --success-text:var(--status-green-900); --success-icon:var(--status-green-700); --success-fill:var(--status-green-700); --success-stroke:var(--status-green-900); --success-surface:var(--status-green-50);
+  --info-text:var(--ceruleo-600); --info-icon:var(--ceruleo-500); --info-fill:var(--ceruleo-500); --info-stroke:var(--ceruleo-600); --info-surface:var(--ceruleo-50);
+  --warning-text:var(--caramelo-900); --warning-icon:var(--caramelo-500); --warning-fill:var(--caramelo-500); --warning-stroke:var(--caramelo-900); --warning-surface:var(--caramelo-50);
+  /* Brand logo colors (brand guide) — logo only, not UI */
+  --brand-azul:#00509e; --brand-rojo:#e20015; --brand-blanco:#ffffff;
+  /* Design System Tools */
+  --ds-fill:var(--verde-200);
+}
+
+/* Typography — 23 text styles from Figma. Sans = Helvetica Neue, Serif = FreightText Pro Medium Italic. */
+:root{
+  --font-sans:"Just Sans","Neue Haas Grotesk Display Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-serif:"FreightTextProMedium-Italic","Freight Text Pro",Georgia,serif;
+  --font-serif-sc:"Freight Text Medium SC","FreightTextProMedium-Italic",Georgia,serif;
+  --font-serif-style:italic;
+  --fw-regular:400; /* @kind font */ --fw-medium:500; /* @kind font */
+  /* sizes */
+  --fs-title-l-sans:52px; --lh-title-l-sans:58px;
+  --fs-title-l-serif:58px; --lh-title-l-serif:58px;
+  --fs-title-sans:32px; --lh-title-sans:38px;
+  --fs-title-serif:36px; --lh-title-serif:38px;
+  --fs-subtitle-1-sans:28px; --lh-subtitle-1:34px;
+  --fs-subtitle-1-serif:32px;
+  --fs-subtitle-2:24px; --lh-subtitle-2:30px;
+  --fs-subtitle-3:18px; --lh-subtitle-3:24px;
+  --fs-prod-card-desk-serif:22px; --lh-prod-card-desk-serif:28px;
+  --fs-prod-card-mob-serif:16px; --lh-prod-card-mob-serif:20px;
+  --fs-body-1:16px; --lh-body-1:22px;
+  --fs-body-2:14px; --lh-body-2:18px;
+  --fs-body-3:12px; --lh-body-3:16px;
+  --fs-cta:16px; --lh-cta:22px;
+  --fs-quote-sans:40px; --lh-quote:48px;
+  --fs-quote-serif:46px;
+  --ls-caps:0.02em;
+  /* shorthand styles (font:) */
+  --type-title-l-sans:400 52px/58px var(--font-sans);
+  --type-title-l-serif:italic 500 58px/58px var(--font-serif);
+  --type-title-sans:400 32px/38px var(--font-sans);
+  --type-title-serif:italic 500 36px/38px var(--font-serif);
+  --type-subtitle-1-sans:400 28px/34px var(--font-sans);
+  --type-subtitle-1-serif:italic 500 32px/34px var(--font-serif);
+  --type-subtitle-1-caps:500 28px/34px var(--font-sans);
+  --type-subtitle-2:400 24px/30px var(--font-sans);
+  --type-subtitle-3:500 18px/24px var(--font-sans);
+  --type-prod-card-desk:italic 500 22px/28px var(--font-serif);
+  --type-prod-card-mob:italic 500 16px/20px var(--font-serif);
+  --type-body-1:400 16px/22px var(--font-sans);
+  --type-body-1-medium:500 16px/22px var(--font-sans);
+  --type-body-2:400 14px/18px var(--font-sans);
+  --type-body-2-medium:500 14px/18px var(--font-sans);
+  --type-body-3:400 12px/16px var(--font-sans);
+  --type-body-3-medium:500 12px/16px var(--font-sans);
+  --type-cta:500 16px/22px var(--font-sans);
+  --type-link:500 16px/22px var(--font-sans);
+  --type-quote-sans:400 40px/48px var(--font-sans);
+  --type-quote-serif:italic 500 46px/48px var(--font-serif);
+}
+
+/* Spacing & sizing — from Figma "2. Semantic Sizes" + "Primitive - Sizes" */
+:root{
+  --space-0:0px; --space-2:2px; --space-4:4px; --space-6:6px; --space-8:8px; --space-12:12px; --space-16:16px; --space-20:20px; --space-24:24px; --space-32:32px; --space-40:40px; --space-48:48px; --space-56:56px;
+  --size-8:8px; --size-16:16px; --size-24:24px; --size-28:28px; --size-32:32px; --size-36:36px; --size-40:40px; --size-48:48px; --size-52:52px; --size-56:56px; --size-60:60px; --size-64:64px; --size-72:72px; --size-80:80px; --size-96:96px; --size-112:112px;
+  --icon-xs:12px; --icon-sm:16px; --icon-md:24px; --icon-lg:32px; --icon-xl:40px;
+  --stroke-sm:0.5px; --stroke-md:1px; --stroke-lg:2px; --stroke-xl:4px; --stroke-xxl:6px;
+  /* layout */
+  --page-desktop:1440px; --page-mobile:393px; --gutter-desktop:40px; --gutter-mobile:20px;
+  --nav-h-desktop:80px; --nav-h-mobile:56px;
+}
+
+:root{
+  --radius-0:0px; --radius-2:2px; --radius-4:4px; --radius-6:6px; --radius-8:8px; --radius-12:12px; --radius-16:16px; --radius-20:20px; --radius-24:24px; --radius-full:999px;
+}
+
+/* Effect styles — exact values from Figma. Do not invent new shadows. */
+:root{
+  --shadow-card:0px 0px 20px 0px #4e43251f;
+  --shadow-product:10px 14px 7px 0px #ccbd9fb2;
+  --shadow-product-set:10px 10px 7px 0px #9baa6e80;
+  --shadow-product-small:4px 4px 5px 0px #ccbd9fb2;
+  --shadow-selector:0px 0px 13px 0px #efe5cf80;
+  --ease-standard:cubic-bezier(.2,0,0,1); /* @kind other */ --dur-fast:120ms; /* @kind other */ --dur-base:200ms; /* @kind other */
+}
+
+/* Colores propios de los hotspots del catálogo (indicados por Christian, 2026-09-30) */
+:root{ --hotspot-default:#045e8b; --hotspot-sale:#fc565b; }
+
+/* Alias de la app → design system (nombres que usa styles.css) */
+:root{
+  --font-display:var(--font-serif);
+  --radius-sm:var(--radius-8); --radius-md:var(--radius-16); --radius-lg:var(--radius-24); --radius-pill:var(--radius-full);
+  --shadow-sm:var(--shadow-selector); --shadow-md:var(--shadow-card); --shadow-lg:var(--shadow-card);
+}

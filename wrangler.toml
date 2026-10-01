@@ -1,0 +1,24 @@
+# Cloudflare Pages: sitio estático (dist/) + API en functions/
+# Los IDs de D1 se completan con `npm run cf:setup` (ver README).
+name = "flipbook-catalogo"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "flipbook-catalogo"
+database_id = "2effe612-0b18-4894-b667-c6f0e4f379c1"
+migrations_dir = "migrations"
+remote = true  # en local (wrangler pages dev) usa la base de producción
+
+[[r2_buckets]]
+binding = "PDFS"
+bucket_name = "flipbook-catalogo-pdfs"
+remote = true  # en local usa los PDFs de producción
+
+# Cloudflare Access (protege /admin/* y /api/admin/*). Se completan al configurar Access:
+# ACCESS_TEAM_DOMAIN = "https://<equipo>.cloudflareaccess.com"
+# ACCESS_AUD         = "<Application Audience (AUD) Tag>"
+[vars]
+ACCESS_TEAM_DOMAIN = "https://misty-snow-1693.cloudflareaccess.com"
+ACCESS_AUD = "e6a42037bc4c6b40fd7399d45ac227b454d42a9f4959fad41e0a6bcdb4a0a335"

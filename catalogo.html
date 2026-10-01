@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo Just</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-logo"><img src="/brand/just-logo.svg" alt="Just" /></span>
+        <span class="brand-divider"></span>
+        <span class="title" id="title">Catálogo</span>
+      </div>
+      <div class="pager" aria-label="Páginas">
+        <button class="icon-btn sm" id="prev-top" aria-label="Página anterior" data-icon="left"></button>
+        <button class="page-jump" id="page-indicator" aria-live="polite" title="Ir a una página">–</button>
+        <form class="page-jump-form" id="page-jump-form" hidden novalidate>
+          <input id="page-jump-input" type="number" inputmode="numeric" min="1" aria-label="Número de página" />
+          <span id="page-jump-total"></span>
+        </form>
+        <button class="icon-btn sm" id="next-top" aria-label="Página siguiente" data-icon="right"></button>
+      </div>
+      <div class="actions">
+        <button class="icon-btn" id="toc-btn" aria-label="Tabla de contenidos" aria-expanded="false" data-icon="menu" hidden><span class="hide-sm">Contenido</span></button>
+        <a class="icon-btn" href="/admin/" id="editor-link" data-icon="edit" hidden><span class="hide-sm">Editor</span></a>
+        <button class="icon-btn cart-btn" id="cart-btn" aria-label="Abrir carrito" data-icon="bag">
+          <span class="badge" id="cart-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <div class="side-nav">
+        <button class="nav-arrow nav-edge" id="first" aria-label="Ir al inicio del catálogo" title="Inicio" data-icon="first"></button>
+        <button class="nav-arrow" id="prev" aria-label="Página anterior" data-icon="left"></button>
+      </div>
+      <div class="book-wrap" id="book-wrap"></div>
+      <div class="side-nav">
+        <button class="nav-arrow nav-edge" id="last" aria-label="Ir al final del catálogo" title="Final" data-icon="last"></button>
+        <button class="nav-arrow" id="next" aria-label="Página siguiente" data-icon="right"></button>
+      </div>
+    </main>
+
+    <div class="scrim" id="scrim"></div>
+    <aside class="drawer toc" id="toc" aria-label="Tabla de contenidos" aria-hidden="true">
+      <header>
+        <button class="icon-btn sm" id="toc-back" aria-label="Volver" data-icon="left" hidden></button>
+        <h3 id="toc-title">Contenido</h3>
+        <button class="modal-close" style="position: static; box-shadow: none" id="toc-close" aria-label="Cerrar" data-icon="close"></button>
+      </header>
+      <nav class="toc-list" id="toc-list"></nav>
+    </aside>
+    <aside class="drawer" id="drawer" aria-label="Carrito" aria-hidden="true">
+      <header>
+        <h3>Tu carrito<span class="count" id="cart-count-label"></span></h3>
+        <button class="modal-close" style="position: static; box-shadow: none" id="drawer-close" aria-label="Cerrar" data-icon="close"></button>
+      </header>
+      <div class="lines" id="cart-lines"></div>
+      <footer>
+        <div class="total"><span>Subtotal</span><span id="cart-total"></span></div>
+        <button class="btn block" id="checkout">Finalizar compra</button>
+        <p class="fine">Envío e impuestos se calculan en el checkout.</p>
+      </footer>
+    </aside>
+
+    <script type="module" src="/src/viewer.js"></script>
+  </body>
+</html>

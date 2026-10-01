@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogos · Just</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body class="home">
+    <header class="topbar">
+      <div class="brand">
+        <a href="/admin/" class="brand-logo" aria-label="Just — todos los catálogos"><img src="/brand/just-logo.svg" alt="Just" /></a>
+        <span class="brand-divider"></span>
+        <span class="title">Catálogos</span>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" id="demo-btn"><span class="hide-sm">Catálogo demo</span><span class="show-sm">Demo</span></button>
+        <label class="btn sm" for="new-pdf" data-icon="plus"><span class="hide-sm">Nuevo catálogo</span></label>
+        <input type="file" id="new-pdf" accept="application/pdf" hidden />
+      </div>
+    </header>
+    <main class="home-main" id="home"></main>
+    <script type="module" src="/src/home.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "flipbook-catalogo",
+  "version": "1.0.0",
+  "description": "Prototipo de catálogo flipbook: PDF + hotspots + info de producto desde Directus + carrito Shopify",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sample": "node scripts/make-sample-pdf.mjs",
+    "dev:api": "wrangler pages dev dist --port 8788",
+    "db:migrate:local": "wrangler d1 migrations apply flipbook-catalogo --local",
+    "db:migrate:remote": "wrangler d1 migrations apply flipbook-catalogo --remote",
+    "cf:deploy": "npm run build && wrangler pages deploy dist --project-name flipbook-catalogo --branch main --commit-dirty=true"
+  },
+  "type": "module",
+  "dependencies": {
+    "jose": "^6.2.12",
+    "page-flip": "^2.0.7",
+    "pdfjs-dist": "^6.3.289"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "vite": "^8.3.1",
+    "wrangler": "^4.145.0"
+  },
+  "private": true
+}

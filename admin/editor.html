@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor de catálogo Just</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <a href="/admin/" class="brand-logo" aria-label="Just — todos los catálogos"><img src="/brand/just-logo.svg" alt="Just" /></a>
+        <span class="brand-divider"></span>
+        <span class="title" id="title">Editor de catálogo</span>
+        <form class="title-form" id="title-form" hidden novalidate>
+          <input id="title-input" maxlength="120" aria-label="Título del catálogo" placeholder="Título del catálogo" />
+        </form>
+      </div>
+      <div class="actions">
+        <span class="save-state" id="save-state" aria-live="polite"></span>
+        <label class="btn secondary sm" for="pdf-input" data-icon="upload" title="Reemplaza el PDF manteniendo título, enlaces y productos cargados a mano"><span class="hide-sm">Actualizar PDF</span></label>
+        <input type="file" id="pdf-input" accept="application/pdf" hidden />
+        <a class="btn dark sm" href="/catalogo.html" id="viewer-link" target="_blank" rel="noopener" data-icon="eye"><span class="hide-sm">Ver catálogo</span></a>
+      </div>
+    </header>
+    <main id="root"></main>
+    <section class="desktop-only" aria-labelledby="desktop-only-title">
+      <div class="desktop-only-card">
+        <span class="desktop-only-icon" data-icon="monitor"></span>
+        <h2 id="desktop-only-title">El editor funciona solo en computadora</h2>
+        <p>Para marcar productos, dibujar enlaces y actualizar el PDF, abrí esta página desde una computadora con una pantalla más grande.</p>
+        <div class="stack">
+          <a class="btn" id="mobile-viewer-link" href="/catalogo.html" data-icon="eye">Ver el catálogo</a>
+          <a class="btn secondary" href="/admin/">Volver a los catálogos</a>
+        </div>
+      </div>
+    </section>
+    <datalist id="codes"></datalist>
+    <script type="module" src="/src/editor.js"></script>
+  </body>
+</html>
