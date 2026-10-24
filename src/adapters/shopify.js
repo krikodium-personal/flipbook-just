@@ -5,8 +5,9 @@
 // mock    → carrito en localStorage con la misma forma que /cart.js, usando el precio de Directus.
 import { config } from '../config.js';
 
-export function createCart() {
-  return config.cart === 'shopify' ? shopifyCart() : mockCart();
+// scope: id del catálogo. El carrito simulado es exclusivo de cada catálogo (el de Shopify es el de la tienda).
+export function createCart(scope = '') {
+  return config.cart === 'shopify' ? shopifyCart() : mockCart(scope);
 }
 
 function shopifyCart() {
@@ -38,8 +39,8 @@ function shopifyCart() {
   };
 }
 
-function mockCart() {
-  const KEY = 'flipbook-mock-cart-v2';
+function mockCart(scope) {
+  const KEY = `flipbook-mock-cart-v3:${scope}`;
   const load = () => {
     try {
       return JSON.parse(localStorage.getItem(KEY)) ?? [];

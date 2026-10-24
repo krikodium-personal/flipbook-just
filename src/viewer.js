@@ -8,7 +8,7 @@ import { $, esc, el, icon, toast, progressView } from './lib/ui.js';
 import { linkKind, normalizeUrl, urlHost } from './lib/links.js';
 
 let products = createProductSource(); // se reemplaza al leer el catálogo (cada uno elige su fuente)
-const cart = createCart();
+let cart = createCart(); // se reemplaza al leer el catálogo: cada uno tiene su propio carrito
 let flip; // PageFlip (escritorio) o MobilePager (celular): misma interfaz
 let bookData = null;
 let loader = null; // carga progresiva de páginas (ver createPageLoader)
@@ -42,6 +42,7 @@ async function init() {
     $('#editor-link').hidden = false;
   }
   products = createProductSource(catalog.source);
+  cart = createCart(catalog.id);
   const brand = brands[catalog.source] ?? brands.directus;
   $('.brand-logo img').src = brand.logo;
   $('.brand-logo img').alt = brand.name;
