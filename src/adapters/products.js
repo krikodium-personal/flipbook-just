@@ -15,7 +15,9 @@
 import { config } from '../config.js';
 import { directusProducts } from '../data/mock-data.js';
 
-export function createProductSource() {
+// source: la del catálogo ('arbell' → arbell.com.ar). Sin indicar (o 'directus') vale la configuración global.
+export function createProductSource(source) {
+  if (source === 'arbell') return arbellSource();
   return config.productsSource === 'mock' ? mockSource() : directusSource(config.directus);
 }
 
@@ -157,6 +159,49 @@ function directusSource({ url, token, market }) {
           ? p.variants.map((v) => ({ code: v.code, name: `${p.name} · ${variantLabel(v.variant_id)}` }))
           : [{ code: p.product_code || p.slug || `#${p.id}`, name: `${p.name}${p.product_code ? '' : ' (sin código en Directus)'}` }],
       );
+    },
+  };
+}
+
+// ---------- Arbell (arbell.com.ar) ----------
+// El "+" guarda el CÓDIGO del producto ("Codigo: 6135" en su ficha), no el id de la URL (/productos/vista/8271).
+// La función /api/public/arbell/:code busca ese código en el sitio y devuelve la ficha.
+function arbellSource() {
+  return {
+    async getByCode(code) {
+      const res = await fetch(`/api/public/arbell/${encodeURIComponent(code)}`);
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error((await res.json().catch(() => null))?.error ?? `Error ${res.status}`);
+      const p = await res.json();
+      return {
+        key: code,
+        name: p.name,
+        tagline: p.netContent ? `Contenido neto ${p.netContent}` : null,
+        description: p.description,
+        benefits: [],
+        usageModes: [],
+        suggestions: [],
+        images: p.images,
+        ecommerceUrl: p.url,
+        // Arbell publica una sola presentación por producto; el precio viaja en centavos como el de Directus
+        variants: [{ code: p.code, label: p.netContent || 'Única', price: p.price != null ? Math.round(p.price * 100) : null, oldPrice: p.oldPrice != null ? Math.round(p.oldPrice * 100) : null, shopifyVariantId: null }],
+        selectedCode: p.code,
+        // Los relacionados de Arbell no traen código: se abren por el id de la URL ("#8271")
+        related: (p.related ?? []).map((r) => ({
+          key: `#${r.id}`,
+          name: r.name,
+          tagline: null,
+          image: r.image,
+          price: r.price != null ? Math.round(r.price * 100) : null,
+          oldPrice: r.oldPrice != null ? Math.round(r.oldPrice * 100) : null,
+          multiplePrices: false,
+          size: null,
+        })),
+      };
+    },
+    // El editor todavía no ofrece lista de productos de Arbell
+    async list() {
+      return [];
     },
   };
 }

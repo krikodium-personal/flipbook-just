@@ -3,13 +3,14 @@
 import { json, error, parseOutline } from '../../_lib/util.js';
 
 export async function onRequestGet({ env, params }) {
-  const row = await env.DB.prepare('SELECT id, name, title, pages, hotspots, outline, updated_at FROM catalogs WHERE id = ?').bind(params.id).first();
+  const row = await env.DB.prepare('SELECT id, name, title, pages, hotspots, outline, source, updated_at FROM catalogs WHERE id = ?').bind(params.id).first();
   if (!row) return error('No existe', 404);
   return json(
     {
       id: row.id,
       title: row.title || row.name,
       pages: row.pages,
+      source: row.source, // de dónde sale la ficha de producto: 'directus' | 'arbell'
       hotspots: JSON.parse(row.hotspots || '[]'),
       outline: parseOutline(row.outline), // null: todavía no calculado (el visor lo arma del PDF)
       version: row.updated_at,

@@ -1,5 +1,5 @@
 // GET  /api/admin/catalogs   → listado (resumen)
-// POST /api/admin/catalogs   → crea un catálogo. Body JSON: { name, title?, pages?, cover?, hotspots? }
+// POST /api/admin/catalogs   → crea un catálogo. Body JSON: { name, title?, pages?, cover?, hotspots?, source? ('directus' | 'arbell') }
 //                               El PDF se sube después con PUT /api/admin/catalogs/:id/pdf
 import { json, error, newId, toMeta, sanitizeHotspots, counts } from '../../_lib/util.js';
 
@@ -29,10 +29,10 @@ export async function onRequestPost({ request, env }) {
   const id = newId();
   const c = counts(hotspots);
   await env.DB.prepare(
-    `INSERT INTO catalogs (id, name, title, pages, cover, hotspots, products, links, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO catalogs (id, name, title, pages, cover, hotspots, products, links, source, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
-    .bind(id, name, body.title?.trim() || null, body.pages ?? null, coverOrNull(body.cover), JSON.stringify(hotspots), c.products, c.links, now, now)
+    .bind(id, name, body.title?.trim() || null, body.pages ?? null, coverOrNull(body.cover), JSON.stringify(hotspots), c.products, c.links, body.source === 'arbell' ? 'arbell' : 'directus', now, now)
     .run();
   return json({ id }, 201);
 }

@@ -44,6 +44,9 @@ svg.i { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none;
 .brand-mark { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--ink); text-decoration: none; }
 .brand-logo { display: flex; align-items: center; flex: none; }
 .brand-logo img { height: 34px; width: auto; display: block; }
+.brand-logo-small img { height: 28px; }
+.price-old { margin-left: 8px; font-size: 0.6em; font-weight: 400; color: var(--text-secondary); text-decoration: line-through; }
+.rel-price .price-old { margin-left: 4px; font-size: 12px; }
 .brand-divider { width: 1px; height: 24px; background: var(--line); flex: none; }
 .title { font-weight: 500; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--ink-soft); }
@@ -943,3 +946,104 @@ body.home.dropping::after { font: var(--type-title-serif); }
 
 /* Beneficios en peso normal (sin negrita) */
 .benefits b { font-weight: 400; }
+
+/* ---------- Tema Arbell (catálogos con fuente 'arbell') ----------
+   Referencia: la sección "Tendencias" de arbell.com.ar: Roboto, fondo blanco, título centrado con líneas a los
+   costados, pills grises (la activa en blanco con sombra), tarjetas blancas de borde suave y esquinas redondeadas,
+   título centrado, precio en negrita y precio anterior tachado en azul. */
+body[data-brand='arbell'], body[data-brand='arbell'] * {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+}
+body[data-brand='arbell'] {
+  --bg: #fff; --surface-muted: #f5f5f5; --arbell-blue: #1193ed; --arbell-line: #e6e6e6; --arbell-pill: #f2f2f2;
+  --cta: #000; --cta-hover: #262626; --cta-pressed: #000; --line: var(--arbell-line);
+}
+body[data-brand='arbell'] .product, body[data-brand='arbell'] .product-media, body[data-brand='arbell'] .product-info,
+body[data-brand='arbell'] .related { background: #fff; }
+body[data-brand='arbell'] .product-media .main, body[data-brand='arbell'] .thumbs-row button {
+  background: #fff; border: 1px solid var(--arbell-line); border-radius: 20px;
+}
+body[data-brand='arbell'] .thumbs-row button[aria-current='true'] { border-color: #000; }
+body[data-brand='arbell'] .product-info h2 { font-weight: 700; font-size: 30px; line-height: 1.2; color: #000; }
+body[data-brand='arbell'] .product-info .price { font-weight: 700; color: #000; }
+body[data-brand='arbell'] .pd-overline { text-transform: none; letter-spacing: 0; }
+
+/* Precio anterior: azul y tachado, separado con un guion como en el sitio ("$9.900 - $14.900") */
+body[data-brand='arbell'] .price-old { color: var(--arbell-blue); font-weight: 400; }
+body[data-brand='arbell'] .price-old::before { content: '- '; text-decoration: none; display: inline-block; margin-right: 2px; }
+
+/* Pills: gris suave; la elegida en blanco con borde y sombra (como "Nuevos" frente a "Ofertas") */
+body[data-brand='arbell'] .chip, body[data-brand='arbell'] .tab-list [role='tab'] {
+  border: 1px solid var(--arbell-line); border-radius: 999px; background: var(--arbell-pill); color: #555; font-weight: 500;
+}
+body[data-brand='arbell'] .chip[aria-pressed='true'], body[data-brand='arbell'] .tab-list [role='tab'][aria-selected='true'] {
+  background: #fff; color: #333; border-color: #d9d9d9; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+body[data-brand='arbell'] .tab-list { gap: 10px; border-bottom: 0; }
+body[data-brand='arbell'] .tab-list [role='tab'] { padding: 8px 20px; border-bottom-width: 1px; }
+body[data-brand='arbell'] .sale-badge { background: var(--arbell-blue); color: #fff; }
+body[data-brand='arbell'] .btn { border-radius: 999px; }
+
+/* Productos relacionados: título centrado entre dos líneas + tarjetas blancas redondeadas */
+body[data-brand='arbell'] .related { border-top: 1px solid var(--arbell-line); }
+body[data-brand='arbell'] .related-head { position: relative; justify-content: center; margin-bottom: 18px; }
+body[data-brand='arbell'] .related-head .section-title {
+  display: flex; align-items: center; gap: 20px; width: 100%; max-width: 560px;
+  font-size: 24px; font-weight: 700; letter-spacing: 0; text-transform: none; color: #000; white-space: nowrap;
+}
+body[data-brand='arbell'] .related-head .section-title::before, body[data-brand='arbell'] .related-head .section-title::after {
+  content: ''; flex: 1; height: 2px; background: #000;
+}
+body[data-brand='arbell'] .related-nav { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+body[data-brand='arbell'] .rel-card {
+  background: #fff; border: 1px solid var(--arbell-line); border-radius: 24px; overflow: hidden; text-align: center; align-items: stretch;
+}
+body[data-brand='arbell'] .rel-photo { background: #fff; border-bottom: 0; }
+body[data-brand='arbell'] .rel-title {
+  border-bottom: 0; justify-content: center; text-align: center; padding: 4px 12px 0; font-size: 15px; font-weight: 400; font-style: normal; color: #000;
+}
+body[data-brand='arbell'] .rel-bottom { min-height: 40px; justify-content: center; }
+body[data-brand='arbell'] .rel-price { flex: none; padding: 0 12px 4px; font-size: 15px; font-weight: 700; color: #000; }
+body[data-brand='arbell'] .rel-price .price-old { font-size: 14px; }
+
+/* Arbell: foto del tamaño de la imagen; descripción debajo a todo el ancho; el modal entero scrollea
+   (nada queda escondido dentro de un scroll interno) y los relacionados van al final */
+body[data-brand='arbell'] .modal:has(.product) { display: block; overflow: auto; height: auto; max-height: calc(100vh - 48px); }
+body[data-brand='arbell'] .modal .product { display: flex; gap: 8px; max-height: none; overflow: visible; }
+body[data-brand='arbell'] .modal .product .product-media {
+  flex: none; height: auto; aspect-ratio: auto; max-width: 50%; overflow: visible; container-type: normal; padding: 32px 0 24px 32px;
+  flex-direction: row; align-items: flex-start;
+}
+body[data-brand='arbell'] .modal .product .product-media .main { flex: none; width: fit-content; max-width: 100%; height: auto; aspect-ratio: auto; }
+body[data-brand='arbell'] .modal .product .product-media .main img {
+  display: block; width: auto; height: auto; max-width: 100%; max-height: 420px; padding: 20px;
+}
+body[data-brand='arbell'] .modal .product .product-info { flex: 1; min-width: 320px; min-height: 0; overflow: visible; padding: 36px 56px 24px 32px; }
+body[data-brand='arbell'] .pd-description { padding: 8px 32px 28px; background: #fff; }
+body[data-brand='arbell'] .pd-description .desc { margin: 0; font-size: 16px; line-height: 1.6; color: #333; white-space: pre-line; }
+@media (max-width: 860px) {
+  body[data-brand='arbell'] .modal .product { flex-direction: column; }
+  body[data-brand='arbell'] .modal .product .product-media { max-width: 100%; padding: 20px 20px 0; }
+  body[data-brand='arbell'] .modal .product .product-info { padding: 20px; }
+  body[data-brand='arbell'] .pd-description { padding: 4px 20px 20px; }
+}
+
+/* Arbell en celular: bottom sheet con cantidad + "Agregar al carrito", fijo al borde inferior del modal */
+body[data-brand='arbell'] .pd-sheet { display: contents; }
+@media (max-width: 860px) {
+  body[data-brand='arbell'] .pd-options:not(:has(*)) { display: none; }
+  body[data-brand='arbell'] .pd-sheet {
+    display: flex; align-items: center; gap: 12px; position: sticky; bottom: 0; z-index: 5;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: #fff;
+    border-radius: 20px 20px 0 0; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+  }
+  body[data-brand='arbell'] .pd-sheet .pd-qty { flex: none; }
+  body[data-brand='arbell'] .pd-sheet .pd-label { display: none; }
+  body[data-brand='arbell'] .pd-sheet .stepper { height: 48px; width: 120px; }
+  body[data-brand='arbell'] .pd-sheet .btn.pd-add { flex: 1; width: auto; max-width: none; height: 48px; }
+}
+@media (max-width: 860px) {
+  /* Relacionados en celular: se desliza con el dedo, sin flechas encima del título */
+  body[data-brand='arbell'] .related-nav { display: none; }
+  body[data-brand='arbell'] .related-head .section-title { font-size: 20px; gap: 12px; }
+}

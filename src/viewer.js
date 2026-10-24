@@ -7,11 +7,19 @@ import { createCart, formatMoney } from './adapters/shopify.js';
 import { $, esc, el, icon, toast, progressView } from './lib/ui.js';
 import { linkKind, normalizeUrl, urlHost } from './lib/links.js';
 
-const products = createProductSource();
+let products = createProductSource(); // se reemplaza al leer el catálogo (cada uno elige su fuente)
 const cart = createCart();
 let flip; // PageFlip (escritorio) o MobilePager (celular): misma interfaz
 let bookData = null;
 let loader = null; // carga progresiva de páginas (ver createPageLoader)
+const loadFont = (href) => document.head.append(Object.assign(document.createElement('link'), { rel: 'stylesheet', href }));
+
+// Marca que se muestra en el encabezado según la fuente de productos del catálogo
+const brands = {
+  directus: { name: 'Just', logo: '/brand/just-logo.svg' },
+  arbell: { name: 'Arbell', logo: '/brand/arbell-logo.png', small: true },
+};
+
 // En celular, una página por vez sin efecto de hoja
 const mobileQuery = window.matchMedia('(max-width: 800px)');
 
@@ -33,9 +41,16 @@ async function init() {
     $('#editor-link').href = `/admin/editor.html?id=${encodeURIComponent(id)}`;
     $('#editor-link').hidden = false;
   }
+  products = createProductSource(catalog.source);
+  const brand = brands[catalog.source] ?? brands.directus;
+  $('.brand-logo img').src = brand.logo;
+  $('.brand-logo img').alt = brand.name;
+  $('.brand-logo').classList.toggle('brand-logo-small', Boolean(brand.small));
+  document.body.dataset.brand = catalog.source ?? 'directus'; // activa el tema de la marca (ver "Tema Arbell" en styles.css)
+  if (catalog.source === 'arbell') loadFont('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
   const title = catalogTitle(catalog);
   $('#title').textContent = title;
-  document.title = `${title} · Just`;
+  document.title = `${title} · ${brand.name}`;
 
   const progress = progressView('Abriendo catálogo…');
   $('#book-wrap').replaceChildren(progress.node);
@@ -397,6 +412,10 @@ function bindTabs(root) {
   });
 }
 
+// Precio anterior tachado (solo si es mayor que el actual)
+const oldPriceHtml = (price, oldPrice) =>
+  oldPrice != null && price != null && oldPrice > price ? ` <s class="price-old">${formatMoney(oldPrice, { decimals: false })}</s>` : '';
+
 // ---------- Productos relacionados (Directus: related_products) ----------
 function relatedSection(related = []) {
   if (!related.length) return '';
@@ -416,7 +435,7 @@ function relatedSection(related = []) {
             <span class="rel-photo">${r.image ? `<img src="${esc(r.image)}" alt="" loading="lazy">` : ''}</span>
             <span class="rel-title">${esc(r.name)}</span>
             <span class="rel-bottom">
-              <span class="rel-price">${r.price != null ? `${r.multiplePrices ? '<small>desde</small> ' : ''}${formatMoney(r.price, { decimals: false })}` : '<small>Sin precio</small>'}</span>
+              <span class="rel-price">${r.price != null ? `${r.multiplePrices ? '<small>desde</small> ' : ''}${formatMoney(r.price, { decimals: false })}${oldPriceHtml(r.price, r.oldPrice)}` : '<small>Sin precio</small>'}</span>
               ${r.size && r.size !== 'Única' ? `<span class="rel-size">${esc(r.size)}</span>` : ''}
             </span>
           </button>`,
@@ -460,6 +479,8 @@ function bindRelated(modal, overlay, close) {
 
 function renderProduct(overlay, product, close) {
   const { variants, images } = product;
+  // En Arbell la descripción va debajo, a todo el ancho del modal, y no dentro del scroll de la columna de información
+  const wideDescription = document.body.dataset.brand === 'arbell';
   const buyable = variants.some((v) => cart.canBuy(v));
   let selected = Math.max(0, variants.findIndex((v) => v.code === product.selectedCode));
   let qty = 1;
@@ -482,7 +503,7 @@ function renderProduct(overlay, product, close) {
       <div class="product-info">
         <!-- Encabezado como el detalle de producto del ecommerce: tags · bajada en mayúsculas · nombre · código · precio -->
         <div class="pd-head">
-          ${product.sale ? `<div class="pd-tags"><span class="sale-badge">Oferta</span></div>` : ''}
+          ${product.sale || variants.some((x) => x.oldPrice > x.price) ? `<div class="pd-tags"><span class="sale-badge">Oferta</span></div>` : ''}
           ${product.tagline ? `<p class="pd-overline">${esc(product.tagline)}</p>` : ''}
           <h2>${esc(product.name)}</h2>
           <p class="pd-code" id="code-line"></p>
@@ -516,14 +537,23 @@ function renderProduct(overlay, product, close) {
             ? '<button class="btn pd-add" id="add">Agregar al carrito</button>'
             : `<p class="notice">${icon('alert')}<span>Este producto todavía no está disponible para comprar desde el catálogo.</span></p>`
         }
-        ${product.description || detailTabs(product).length ? '<div class="divider"></div>' : ''}
-        ${product.description ? `<p class="desc">${esc(product.description)}</p>` : ''}
+        ${(!wideDescription && product.description) || detailTabs(product).length ? '<div class="divider"></div>' : ''}
+        ${!wideDescription && product.description ? `<p class="desc">${esc(product.description)}</p>` : ''}
         ${tabsHtml(detailTabs(product))}
       </div>
     </div>
+    ${wideDescription && product.description ? `<section class="pd-description"><p class="desc">${esc(product.description)}</p></section>` : ''}
     ${relatedSection(product.related)}`;
   modal.querySelector('.modal-close').addEventListener('click', close);
   modal.scrollTop = 0;
+  // Arbell en celular: cantidad + "Agregar al carrito" quedan fijos abajo, como un bottom sheet.
+  // Se mueven los mismos nodos (con sus eventos) a una barra pegada al borde inferior del modal.
+  if (wideDescription && buyable && window.matchMedia('(max-width: 860px)').matches) {
+    const sheet = document.createElement('div');
+    sheet.className = 'pd-sheet';
+    sheet.append(modal.querySelector('.pd-qty'), modal.querySelector('#add'));
+    modal.append(sheet);
+  }
   bindRelated(modal, overlay, close);
 
   bindTabs(modal);
@@ -542,7 +572,7 @@ function renderProduct(overlay, product, close) {
     modal.querySelectorAll('[data-variant]').forEach((c) => c.setAttribute('aria-pressed', Number(c.dataset.variant) === selected));
     if (!addBtn) return;
     const ok = v && cart.canBuy(v);
-    modal.querySelector('#price').textContent = ok ? formatMoney(v.price, { decimals: false }) : 'Sin precio para esta presentación';
+    modal.querySelector('#price').innerHTML = ok ? `${formatMoney(v.price, { decimals: false })}${oldPriceHtml(v.price, v.oldPrice)}` : 'Sin precio para esta presentación';
     addBtn.disabled = !ok;
     modal.querySelector('#qty').textContent = qty;
     modal.querySelector('[data-qty="-1"]').disabled = qty <= 1;
