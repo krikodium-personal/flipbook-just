@@ -45,6 +45,7 @@ async function init() {
   const brand = brands[catalog.source] ?? brands.directus;
   $('.brand-logo img').src = brand.logo;
   $('.brand-logo img').alt = brand.name;
+  $('.brand-logo img').style.visibility = '';
   $('.brand-logo').classList.toggle('brand-logo-small', Boolean(brand.small));
   document.body.dataset.brand = catalog.source ?? 'directus'; // activa el tema de la marca (ver "Tema Arbell" en styles.css)
   if (catalog.source === 'arbell') loadFont('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -52,7 +53,7 @@ async function init() {
   $('#title').textContent = title;
   document.title = `${title} · ${brand.name}`;
 
-  const progress = progressView('Abriendo catálogo…');
+  const progress = progressView('Abriendo catálogo…', brand);
   $('#book-wrap').replaceChildren(progress.node);
   let doc;
   try {

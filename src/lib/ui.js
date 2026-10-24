@@ -47,8 +47,9 @@ export function toast(message, { error = false } = {}) {
   toastTimer = setTimeout(() => node.remove(), 2600);
 }
 
-export function progressView(label) {
-  const node = el(`<div class="loading"><img class="loading-logo" src="/brand/just-logo.svg" alt="Just"><div>${esc(label)}</div><div class="progress"><div></div></div><small></small></div>`);
+// brand: { logo, name } de la marca del catálogo (por defecto Just)
+export function progressView(label, { logo = '/brand/just-logo.svg', name = 'Just' } = {}) {
+  const node = el(`<div class="loading"><img class="loading-logo" src="${esc(logo)}" alt="${esc(name)}"><div>${esc(label)}</div><div class="progress"><div></div></div><small></small></div>`);
   return {
     node,
     update(n, total) {

@@ -149,6 +149,7 @@ svg.i { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none;
 
 .loading { text-align: center; color: var(--ink-soft); }
 .loading-logo { height: 56px; width: auto; display: block; margin: 0 auto 16px; }
+.loading-logo[src$='arbell-logo.png'] { height: 28px; }
 .progress { width: 240px; height: 4px; background: var(--bg-neutral-300); border-radius: var(--radius-pill); overflow: hidden; margin: 14px auto 8px; }
 .progress > div { height: 100%; background: var(--cta); width: 0; transition: width 0.2s; }
 .loading small { font-variant-numeric: tabular-nums; color: var(--ink-faint); }
