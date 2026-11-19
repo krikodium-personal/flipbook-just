@@ -4,7 +4,7 @@ export const config = {
   // mock → carrito simulado en el navegador · shopify → Ajax Cart API (solo servido desde el dominio de la tienda)
   cart: import.meta.env.VITE_CART ?? 'mock',
   directus: {
-    url: import.meta.env.VITE_DIRECTUS_URL ?? 'https://directus-production-4078.up.railway.app',
+    url: import.meta.env.VITE_DIRECTUS_URL ?? 'https://directus.krikorian.ar',
     // Hoy no hace falta: el rol Public ya lee products/product_variants/variants/prices.
     // Si se usa, que sea de SOLO LECTURA: en el tema de Shopify queda visible para cualquiera.
     token: import.meta.env.VITE_DIRECTUS_TOKEN ?? '',

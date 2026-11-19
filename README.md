@@ -9,7 +9,7 @@ Réplica del catálogo interactivo de iPaper, con tres cambios de fondo:
 3. **"Agregar al carrito" usa el carrito real de Shopify** y el checkout es el de Shopify.
 
 > Estado: **prototipo**. La ficha de producto se lee del **Directus real**
-> (`https://directus-production-4078.up.railway.app`, rol Public, sin token). El carrito todavía es simulado.
+> (`https://directus.krikorian.ar`, rol Public, sin token). El carrito todavía es simulado.
 > Los catálogos se guardan en **Cloudflare**: configuración en D1, PDFs en R2, API en Pages Functions.
 
 ## Correr en local

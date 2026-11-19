@@ -17,7 +17,7 @@ Hoy es un **prototipo**: el carrito es simulado (localStorage) y los precios sal
 
 | Tema | Decisión | Fecha |
 |---|---|---|
-| CMS | Directus (Railway, proyecto "Directus Test Just"): `https://directus-production-4078.up.railway.app` | 2026-09-30 |
+| CMS | Directus (Cloudflare Containers + Neon, migrado desde Railway el 2026-11): `https://directus.krikorian.ar` | 2026-09-30 |
 | Shopify | La tienda existe pero los SKUs **no coinciden** con los códigos del catálogo → la equivalencia irá en Directus (`shopify_variant_id` por variante; el campo todavía no existe) | 2026-09-30 |
 | Destino final | El flipbook vive **dentro del tema de Shopify** (Ajax Cart API). El adaptador ya está en `src/adapters/shopify.js`, sin usar | 2026-09-30 |
 | Etapa | Prototipo primero, producción después | 2026-09-30 |
